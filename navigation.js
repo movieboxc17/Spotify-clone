@@ -1381,6 +1381,318 @@ const Navigation = (function() {
                     </div>
                 </div>
 
+                <div class="detail-footer">
+                <div class="copyright-info">
+                        © ${new Date().getFullYear()} ${isAlbum ? subtitle.split(' • ')[0] : 'Spotify AB'}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Generate sample songs for detail view
+        function generateDetailSongs(isAlbum) {
+            const trackTitles = [
+                'Intro', 'First Song', 'Main Track', 'Featured Artist Collab', 
+                'Interlude', 'The Hit Single', 'Deep Cut', 'Slow Jam', 
+                'Emotional Ballad', 'Outro'
+            ];
+            
+            let html = '';
+            
+            for (let i = 0; i < 10; i++) {
+                const trackNum = i + 1;
+                const trackTitle = trackTitles[i];
+                const artistName = isAlbum ? subtitle.split(' • ')[0] : 'Various Artists';
+                const albumName = isAlbum ? title : 'Various Albums';
+                const dateAdded = `${Math.floor(Math.random() * 4) + 1} ${['days', 'weeks', 'months'][Math.floor(Math.random() * 3)]} ago`;
+                const minutes = Math.floor(Math.random() * 4) + 2;
+                const seconds = Math.floor(Math.random() * 60);
+                const duration = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                
+                html += `
+                    <div class="song-row">
+                        <div class="col-num">${trackNum}</div>
+                        <div class="col-title">
+                            <div class="song-title-info">
+                                <div class="song-title">${trackTitle}</div>
+                                <div class="song-artist">${artistName}</div>
+                            </div>
+                        </div>
+                        ${isAlbum ? '' : `<div class="col-album">${albumName}</div>`}
+                        <div class="col-date">${dateAdded}</div>
+                        <div class="col-duration">${duration}</div>
+                    </div>
+                `;
+            }
+            
+            return html;
+        }
+        
+        // Style detail container
+        const detailContainer = content.querySelector('.detail-container');
+        
+        // Style detail header
+        const detailHeader = content.querySelector('.detail-header');
+        detailHeader.style.display = 'flex';
+        detailHeader.style.alignItems = 'flex-end';
+        detailHeader.style.padding = '32px';
+        detailHeader.style.marginBottom = '24px';
+        detailHeader.style.backgroundImage = `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(18, 18, 18, 1)), url(${imgSrc})`;
+        detailHeader.style.backgroundSize = 'cover';
+        detailHeader.style.backgroundPosition = 'center';
+        
+        // Style detail image
+        const detailImg = content.querySelector('.detail-img');
+        detailImg.style.width = '232px';
+        detailImg.style.height = '232px';
+        detailImg.style.marginRight = '24px';
+        detailImg.style.boxShadow = '0 4px 60px rgba(0, 0, 0, 0.5)';
+        
+        detailImg.querySelector('img').style.width = '100%';
+        detailImg.querySelector('img').style.height = '100%';
+        detailImg.querySelector('img').style.objectFit = 'cover';
+        
+        // Style detail info
+        const detailInfo = content.querySelector('.detail-info');
+        
+        detailInfo.querySelector('.detail-type').style.fontSize = '14px';
+        detailInfo.querySelector('.detail-type').style.fontWeight = '700';
+        detailInfo.querySelector('.detail-type').style.marginBottom = '8px';
+        
+        detailInfo.querySelector('.detail-title').style.fontSize = '96px';
+        detailInfo.querySelector('.detail-title').style.fontWeight = '900';
+        detailInfo.querySelector('.detail-title').style.marginBottom = '12px';
+        detailInfo.querySelector('.detail-title').style.marginTop = '0';
+        
+        detailInfo.querySelector('.detail-description').style.fontSize = '16px';
+        detailInfo.querySelector('.detail-description').style.marginBottom = '12px';
+        
+        // Style detail meta
+        const detailMeta = content.querySelector('.detail-meta');
+        detailMeta.style.fontSize = '14px';
+        detailMeta.style.color = 'var(--text-subdued)';
+        
+        detailMeta.querySelector('.detail-owner').style.fontWeight = '700';
+        
+        // Add separators
+        const metaItems = detailMeta.querySelectorAll('span');
+        for (let i = 1; i < metaItems.length; i++) {
+            metaItems[i].style.position = 'relative';
+            metaItems[i].style.paddingLeft = '12px';
+            
+            const separator = document.createElement('span');
+            separator.textContent = '•';
+            separator.style.position = 'absolute';
+            separator.style.left = '4px';
+            metaItems[i].prepend(separator);
+        }
+        
+        // Style detail controls
+        const detailControls = content.querySelector('.detail-controls');
+        detailControls.style.display = 'flex';
+        detailControls.style.alignItems = 'center';
+        detailControls.style.padding = '24px 32px';
+        
+        // Style play button
+        const playBtn = content.querySelector('.play-btn');
+        playBtn.style.width = '56px';
+        playBtn.style.height = '56px';
+        playBtn.style.borderRadius = '50%';
+        playBtn.style.backgroundColor = 'var(--spotify-green)';
+        playBtn.style.color = 'black';
+        playBtn.style.border = 'none';
+        playBtn.style.display = 'flex';
+        playBtn.style.alignItems = 'center';
+        playBtn.style.justifyContent = 'center';
+        playBtn.style.marginRight = '32px';
+        playBtn.style.cursor = 'pointer';
+        playBtn.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.3)';
+        
+        playBtn.querySelector('i').style.fontSize = '24px';
+        playBtn.querySelector('i').style.marginLeft = '3px'; // Center the play icon
+        
+        // Add play button functionality
+        playBtn.addEventListener('click', function() {
+            // Toggle play state
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-play')) {
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+                Player.updateNowPlaying(title, subtitle, imgSrc);
+                Player.togglePlayPause();
+            } else {
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+                Player.togglePlayPause();
+            }
+        });
+        
+        // Style action buttons
+        const actionButtons = content.querySelectorAll('.like-btn, .download-btn, .options-btn');
+        actionButtons.forEach(btn => {
+            btn.style.backgroundColor = 'transparent';
+            btn.style.border = 'none';
+            btn.style.color = 'var(--text-subdued)';
+            btn.style.fontSize = '20px';
+            btn.style.marginRight = '24px';
+            btn.style.cursor = 'pointer';
+            btn.style.transition = 'all 0.2s ease';
+            
+            // Add hover effect
+            btn.addEventListener('mouseover', function() {
+                this.style.color = 'white';
+                this.style.transform = 'scale(1.1)';
+            });
+            
+            btn.addEventListener('mouseout', function() {
+                this.style.color = 'var(--text-subdued)';
+                this.style.transform = 'scale(1)';
+            });
+        });
+        
+        // Style like button specifically
+        const likeBtn = content.querySelector('.like-btn');
+        likeBtn.addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                icon.style.color = 'var(--spotify-green)';
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                icon.style.color = 'var(--text-subdued)';
+            }
+        });
+        
+        // Style songs table
+        const songsTable = content.querySelector('.songs-table');
+        songsTable.style.padding = '0 32px';
+        
+        // Style songs header
+        const songsHeader = content.querySelector('.songs-header');
+        songsHeader.style.display = 'grid';
+        songsHeader.style.gridTemplateColumns = isAlbum ? '16px 4fr 2fr 1fr' : '16px 4fr 2fr 2fr 1fr';
+        songsHeader.style.gap = '16px';
+        songsHeader.style.padding = '0 16px 8px 16px';
+        songsHeader.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+        songsHeader.style.color = 'var(--text-subdued)';
+        songsHeader.style.fontSize = '14px';
+        
+        // Style song rows
+        const songRows = content.querySelectorAll('.song-row');
+        songRows.forEach(row => {
+            row.style.display = 'grid';
+            row.style.gridTemplateColumns = isAlbum ? '16px 4fr 2fr 1fr' : '16px 4fr 2fr 2fr 1fr';
+            row.style.gap = '16px';
+            row.style.padding = '16px';
+            row.style.borderRadius = '4px';
+            row.style.cursor = 'pointer';
+            row.style.transition = 'background-color 0.2s ease';
+            
+            // Style title info
+            const titleInfo = row.querySelector('.song-title-info');
+            titleInfo.style.display = 'flex';
+            titleInfo.style.flexDirection = 'column';
+            
+            row.querySelector('.song-title').style.fontSize = '16px';
+            row.querySelector('.song-title').style.marginBottom = '4px';
+            
+            row.querySelector('.song-artist').style.fontSize = '14px';
+            row.querySelector('.song-artist').style.color = 'var(--text-subdued)';
+            
+            // Style other columns
+            if (!isAlbum && row.querySelector('.col-album')) {
+                row.querySelector('.col-album').style.color = 'var(--text-subdued)';
+            }
+            row.querySelector('.col-date').style.color = 'var(--text-subdued)';
+            row.querySelector('.col-duration').style.color = 'var(--text-subdued)';
+            
+            // Add hover effect
+            row.addEventListener('mouseover', function() {
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            });
+            
+            row.addEventListener('mouseout', function() {
+                this.style.backgroundColor = 'transparent';
+            });
+            
+            // Add click functionality
+            row.addEventListener('click', function() {
+                const trackTitle = this.querySelector('.song-title').textContent;
+                const artistName = this.querySelector('.song-artist').textContent;
+                
+                Player.updateNowPlaying(trackTitle, artistName, imgSrc);
+                Player.togglePlayPause();
+            });
+        });
+        
+        // Style detail footer
+        const detailFooter = content.querySelector('.detail-footer');
+        detailFooter.style.padding = '32px';
+        detailFooter.style.color = 'var(--text-subdued)';
+        detailFooter.style.fontSize = '14px';
+        
+        return content;
+    }
+    
+    // Initialize content sections
+    function initContentSections() {
+        contentSections.Home = createHomeContent();
+        contentSections.Search = createSearchContent();
+        contentSections.Library = createLibraryContent();
+        contentSections['Create Playlist'] = createEmptyPlaylistContent();
+        contentSections['Liked Songs'] = createLikedSongsContent();
+    }
+    
+    // Initialize navigation
+    function initNavigation() {
+        // Create initial content sections
+        initContentSections();
+        
+        // Set home as initial page
+        navigateTo('Home');
+        
+        // Add event listeners to navigation items
+        document.querySelectorAll('.main-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionName = this.textContent.trim();
+                navigateTo(sectionName);
+            });
+        });
+        
+        // Add event listeners to back/forward buttons
+        backBtn.addEventListener('click', function() {
+            if (currentHistoryIndex > 0) {
+                currentHistoryIndex--;
+                const sectionName = navigationHistory[currentHistoryIndex];
+                renderContent(sectionName);
+                updateNavButtons();
+            }
+        });
+        
+        forwardBtn.addEventListener('click', function() {
+            if (currentHistoryIndex < navigationHistory.length - 1) {
+                currentHistoryIndex++;
+                const sectionName = navigationHistory[currentHistoryIndex];
+                renderContent(sectionName);
+                updateNavButtons();
+            }
+        });
+    }
+    
+    // Return public methods
+    return {
+        init: initNavigation,
+        navigateTo: navigateTo
+    };
+})();
+
+// Initialize the Navigation module when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    Navigation.init();
+});
                 
                 
                 
