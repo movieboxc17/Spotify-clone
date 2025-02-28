@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png" alt="Spotify Logo">
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-search"></i> Search</a></li>
+                    <li><a href="#"><i class="fas fa-book-open"></i> Your Library</a></li>
+                </ul>
+            </nav>
+            
+            <div class="playlist-actions">
+                <div class="create-playlist">
+                    <i class="fas fa-plus-square"></i>
+                    <span>Create Playlist</span>
+                </div>
+                <div class="liked-songs">
+                    <i class="fas fa-heart"></i>
+                    <span>Liked Songs</span>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="playlists">
+                <div class="playlist">My Playlist #1</div>
+                <div class="playlist">Chill Vibes</div>
+                <div class="playlist">Workout Mix</div>
+                <div class="playlist">Indie Discoveries</div>
+                <div class="playlist">Top Hits 2023</div>
+                <div class="playlist">Throwback Thursday</div>
+                <div class="playlist">Road Trip</div>
+                <div class="playlist">Study Music</div>
+            </div>
+            
+            <div class="install-app">
+                <i class="fas fa-arrow-circle-down"></i>
+                <span>Install App</span>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="nav-buttons">
+                    <button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                
+                <div class="user-menu">
+                    <button class="upgrade-btn">Upgrade</button>
+                    <div class="profile-btn">
+                        <img src="https://i.pravatar.cc/32" alt="Profile">
+                        <span>Profile</span>
+                        <i class="fas fa-caret-down"></i>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content">
+                <section class="greeting">
+                    <h2>Good afternoon</h2>
+                    <div class="quick-links">
+                        <div class="quick-link-item">
+                            <img src="https://picsum.photos/seed/1/80" alt="Playlist">
+                            <span>Liked Songs</span>
+                        </div>
+                        <div class="quick-link-item">
+                            <img src="https://picsum.photos/seed/2/80" alt="Playlist">
+                            <span>Daily Mix 1</span>
+                        </div>
+                        <div class="quick-link-item">
+                            <img src="https://picsum.photos/seed/3/80" alt="Playlist">
+                            <span>Discover Weekly</span>
+                        </div>
+                        <div class="quick-link-item">
+                            <img src="https://picsum.photos/seed/4/80" alt="Playlist">
+                            <span>2023 Wrapped</span>
+                        </div>
+                        <div class="quick-link-item">
+                            <img src="https://picsum.photos/seed/5/80" alt="Playlist">
+                            <span>Top Hits</span>
+                        </div>
+                        <div class="quick-link-item">
+                            <img src="https://picsum.photos/seed/6/80" alt="Playlist">
+                            <span>Chill Mix</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="made-for-you">
+                    <div class="section-header">
+                        <h2>Made For You</h2>
+                        <a href="#" class="see-all">See all</a>
+                    </div>
+                    <div class="card-grid">
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/11/180" alt="Playlist">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <h4>Daily Mix 1</h4>
+                            <p>Lana Del Rey, Arctic Monkeys and more</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/12/180" alt="Playlist">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <h4>Discover Weekly</h4>
+                            <p>Your weekly mixtape of fresh music</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/13/180" alt="Playlist">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <h4>Release Radar</h4>
+                            <p>Catch all the latest music from artists you follow</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/14/180" alt="Playlist">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <h4>Daily Mix 2</h4>
+                            <p>Coldplay, Imagine Dragons and more</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/15/180" alt="Playlist">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <h4>On Repeat</h4>
+                            <p>Songs you've been playing most</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="recently-played">
+                    <div class="section-header">
+                        <h2>Recently Played</h2>
+                        <a href="#" class="see-all">See all</a>
+                    </div>
+                    <div class="card-grid">
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/21/180" alt="Album">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <h4>Dinner Party Jazz</h4>
+                            <p>Playlist</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/22/180" alt="Album">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <h4>Indie Acoustic</h4>
+                            <p>Playlist</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/23/180" alt="Album">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <h4>This Is Dua Lipa</h4>
+                            <p>Playlist</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/24/180" alt="Album">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <h4>Peaceful Piano</h4>
+                            <p>Playlist</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="https://picsum.photos/seed/25/180" alt="Album">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                            </div>
+                            <h4>Lo-Fi Beats</h4>
+                            <p>Playlist</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <!-- Bottom Player Controls -->
+        <footer class="player">
+            <div class="now-playing">
+                <img src="https://picsum.photos/seed/100/56" alt="Album Cover">
+                <div class="track-info">
+                    <div class="track-name">Bohemian Rhapsody</div>
+                    <div class="artist-name">Queen</div>
+                </div>
+                <button class="like-btn"><i class="far fa-heart"></i></button>
+                <button class="picture-in-picture"><i class="fas fa-tv"></i></button>
+            </div>
+            
+            <div class="player-controls">
+                <div class="control-buttons">
+                    <button class="control-btn"><i class="fas fa-random"></i></button>
+                    <button class="control-btn"><i class="fas fa-step-backward"></i></button>
+                    <button class="play-pause-btn"><i class="fas fa-play"></i></button>
+                    <button class="control-btn"><i class="fas fa-step-forward"></i></button>
+                    <button class="control-btn"><i class="fas fa-redo"></i></button>
+                </div>
+                <div class="playback-bar">
+                    <span class="current-time">1:21</span>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <span class="total-time">5:56</span>
+                </div>
+            </div>
+            
+            <div class="extra-controls">
+                <button class="control-btn"><i class="fas fa-list-ul"></i></button>
+                <button class="control-btn"><i class="fas fa-desktop"></i></button>
+                <div class="volume-control">
+                    <button class="control-btn"><i class="fas fa-volume-up"></i></button>
+                    <div class="volume-bar-container">
+                        <div class="volume-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
