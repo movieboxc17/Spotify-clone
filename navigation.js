@@ -1693,7 +1693,3 @@ const Navigation = (function() {
 document.addEventListener('DOMContentLoaded', function() {
     Navigation.init();
 });
-                
-                
-                
-        
