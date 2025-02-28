@@ -1095,5 +1095,293 @@ const Navigation = (function() {
                 </div>
                 
                 <div class="playlist-controls">
+                <button class="play-btn"><i class="fas fa-play"></i></button>
+                    <button class="like-btn"><i class="fas fa-heart"></i></button>
+                    <div class="playlist-options">
+                        <button class="options-btn"><i class="fas fa-ellipsis-h"></i></button>
+                    </div>
+                </div>
+                
+                <div class="songs-table">
+                    <div class="songs-header">
+                        <div class="col-num">#</div>
+                        <div class="col-title">Title</div>
+                        <div class="col-album">Album</div>
+                        <div class="col-date">Date Added</div>
+                        <div class="col-duration"><i class="far fa-clock"></i></div>
+                    </div>
+                    
+                    <div class="songs-list">
+                        ${generateLikedSongs()}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Create sample liked songs
+        function generateLikedSongs() {
+            const songs = [
+                { num: '1', title: 'Blinding Lights', artist: 'The Weeknd', album: 'After Hours', date: '2 days ago', duration: '3:20' },
+                { num: '2', title: 'Levitating', artist: 'Dua Lipa', album: 'Future Nostalgia', date: '3 days ago', duration: '3:23' },
+                { num: '3', title: 'Save Your Tears', artist: 'The Weeknd', album: 'After Hours', date: '5 days ago', duration: '3:35' },
+                { num: '4', title: 'Good 4 U', artist: 'Olivia Rodrigo', album: 'SOUR', date: '1 week ago', duration: '2:58' },
+                { num: '5', title: 'Stay', artist: 'The Kid LAROI, Justin Bieber', album: 'F*CK LOVE 3: OVER YOU', date: '1 week ago', duration: '2:21' },
+                { num: '6', title: 'Bad Habits', artist: 'Ed Sheeran', album: '=', date: '2 weeks ago', duration: '3:50' },
+                { num: '7', title: 'Montero (Call Me By Your Name)', artist: 'Lil Nas X', album: 'MONTERO', date: '3 weeks ago', duration: '2:17' },
+                { num: '8', title: 'Peaches', artist: 'Justin Bieber', album: 'Justice', date: '1 month ago', duration: '3:18' },
+                { num: '9', title: 'Kiss Me More', artist: 'Doja Cat ft. SZA', album: 'Planet Her', date: '1 month ago', duration: '3:28' },
+                { num: '10', title: 'Butter', artist: 'BTS', album: 'Butter', date: '2 months ago', duration: '2:42' }
+            ];
+            
+            return songs.map(song => `
+                <div class="song-row">
+                    <div class="col-num">${song.num}</div>
+                    <div class="col-title">
+                        <div class="song-title-info">
+                            <div class="song-title">${song.title}</div>
+                            <div class="song-artist">${song.artist}</div>
+                        </div>
+                    </div>
+                    <div class="col-album">${song.album}</div>
+                    <div class="col-date">${song.date}</div>
+                    <div class="col-duration">${song.duration}</div>
+                </div>
+            `).join('');
+        }
+        
+        // Style liked songs container
+        const likedSongsContainer = content.querySelector('.liked-songs-container');
+        
+        // Style playlist info
+        const playlistInfo = content.querySelector('.playlist-info');
+        playlistInfo.style.display = 'flex';
+        playlistInfo.style.alignItems = 'flex-end';
+        playlistInfo.style.padding = '32px';
+        playlistInfo.style.marginBottom = '24px';
+        playlistInfo.style.background = 'linear-gradient(to bottom, #5038A0, rgba(80, 56, 160, 0.6))';
+        
+        // Style playlist image
+        const playlistImg = content.querySelector('.playlist-img');
+        playlistImg.style.width = '232px';
+        playlistImg.style.height = '232px';
+        playlistImg.style.marginRight = '24px';
+        playlistImg.style.boxShadow = '0 4px 60px rgba(0, 0, 0, 0.5)';
+        
+        // Style liked songs icon
+        const likedSongsIcon = content.querySelector('.liked-songs-icon');
+        likedSongsIcon.style.width = '100%';
+        likedSongsIcon.style.height = '100%';
+        likedSongsIcon.style.background = 'linear-gradient(135deg, #450af5, #c4efd9)';
+        likedSongsIcon.style.display = 'flex';
+        likedSongsIcon.style.alignItems = 'center';
+        likedSongsIcon.style.justifyContent = 'center';
+        
+        likedSongsIcon.querySelector('i').style.fontSize = '96px';
+        likedSongsIcon.querySelector('i').style.color = 'white';
+        
+        // Style playlist details
+        const playlistDetails = content.querySelector('.playlist-details');
+        
+        playlistDetails.querySelector('.playlist-type').style.fontSize = '14px';
+        playlistDetails.querySelector('.playlist-type').style.fontWeight = '700';
+        playlistDetails.querySelector('.playlist-type').style.marginBottom = '8px';
+        
+        playlistDetails.querySelector('.playlist-title').style.fontSize = '96px';
+        playlistDetails.querySelector('.playlist-title').style.fontWeight = '900';
+        playlistDetails.querySelector('.playlist-title').style.marginBottom = '12px';
+        playlistDetails.querySelector('.playlist-title').style.marginTop = '0';
+        
+        // Style playlist meta
+        const playlistMeta = content.querySelector('.playlist-meta');
+        playlistMeta.style.fontSize = '14px';
+        
+        playlistMeta.querySelector('.username').style.fontWeight = '700';
+        
+        playlistMeta.querySelector('.songs-count').style.position = 'relative';
+        playlistMeta.querySelector('.songs-count').style.paddingLeft = '12px';
+        
+        // Add separator dot
+        const separator = document.createElement('span');
+        separator.textContent = '•';
+        separator.style.position = 'absolute';
+        separator.style.left = '4px';
+        playlistMeta.querySelector('.songs-count').prepend(separator);
+        
+        // Style playlist controls
+        const playlistControls = content.querySelector('.playlist-controls');
+        playlistControls.style.display = 'flex';
+        playlistControls.style.alignItems = 'center';
+        playlistControls.style.padding = '24px 32px';
+        
+        // Style play button
+        const playBtn = content.querySelector('.play-btn');
+        playBtn.style.width = '56px';
+        playBtn.style.height = '56px';
+        playBtn.style.borderRadius = '50%';
+        playBtn.style.backgroundColor = 'var(--spotify-green)';
+        playBtn.style.color = 'black';
+        playBtn.style.border = 'none';
+        playBtn.style.display = 'flex';
+        playBtn.style.alignItems = 'center';
+        playBtn.style.justifyContent = 'center';
+        playBtn.style.marginRight = '32px';
+        playBtn.style.cursor = 'pointer';
+        playBtn.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.3)';
+        
+        playBtn.querySelector('i').style.fontSize = '24px';
+        playBtn.querySelector('i').style.marginLeft = '3px'; // Center the play icon
+        
+        // Add play button functionality
+        playBtn.addEventListener('click', function() {
+            // Toggle play state
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-play')) {
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+                Player.togglePlayPause();
+            } else {
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+                Player.togglePlayPause();
+            }
+        });
+        
+        // Style like button
+        const likeBtn = content.querySelector('.like-btn');
+        likeBtn.style.backgroundColor = 'transparent';
+        likeBtn.style.border = 'none';
+        likeBtn.style.color = 'var(--spotify-green)';
+        likeBtn.style.fontSize = '24px';
+        likeBtn.style.marginRight = '24px';
+        likeBtn.style.cursor = 'pointer';
+        
+        // Style options button
+        const optionsBtn = content.querySelector('.options-btn');
+        optionsBtn.style.backgroundColor = 'transparent';
+        optionsBtn.style.border = 'none';
+        optionsBtn.style.color = 'var(--text-subdued)';
+        optionsBtn.style.fontSize = '24px';
+        optionsBtn.style.cursor = 'pointer';
+        
+        // Style songs table
+        const songsTable = content.querySelector('.songs-table');
+        songsTable.style.padding = '0 32px';
+        
+        // Style songs header
+        const songsHeader = content.querySelector('.songs-header');
+        songsHeader.style.display = 'grid';
+        songsHeader.style.gridTemplateColumns = '16px 4fr 3fr 2fr 1fr';
+        songsHeader.style.gap = '16px';
+        songsHeader.style.padding = '0 16px 8px 16px';
+        songsHeader.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+        songsHeader.style.color = 'var(--text-subdued)';
+        songsHeader.style.fontSize = '14px';
+        
+        // Style song rows
+        const songRows = content.querySelectorAll('.song-row');
+        songRows.forEach(row => {
+            row.style.display = 'grid';
+            row.style.gridTemplateColumns = '16px 4fr 3fr 2fr 1fr';
+            row.style.gap = '16px';
+            row.style.padding = '16px';
+            row.style.borderRadius = '4px';
+            row.style.cursor = 'pointer';
+            row.style.transition = 'background-color 0.2s ease';
+            
+            // Style title info
+            const titleInfo = row.querySelector('.song-title-info');
+            titleInfo.style.display = 'flex';
+            titleInfo.style.flexDirection = 'column';
+            
+            row.querySelector('.song-title').style.fontSize = '16px';
+            row.querySelector('.song-title').style.marginBottom = '4px';
+            
+            row.querySelector('.song-artist').style.fontSize = '14px';
+            row.querySelector('.song-artist').style.color = 'var(--text-subdued)';
+            
+            // Style other columns
+            row.querySelector('.col-album').style.color = 'var(--text-subdued)';
+            row.querySelector('.col-date').style.color = 'var(--text-subdued)';
+            row.querySelector('.col-duration').style.color = 'var(--text-subdued)';
+            
+            // Add hover effect
+            row.addEventListener('mouseover', function() {
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            });
+            
+            row.addEventListener('mouseout', function() {
+                this.style.backgroundColor = 'transparent';
+            });
+            
+            // Add click functionality
+            row.addEventListener('click', function() {
+                const title = this.querySelector('.song-title').textContent;
+                const artist = this.querySelector('.song-artist').textContent;
+                
+                // Create a random color for placeholder image
+                const randomColor = Math.floor(Math.random()*16777215).toString(16);
+                const imgSrc = `https://via.placeholder.com/60/${randomColor}/FFFFFF?text=${title.charAt(0)}`;
+                
+                Player.updateNowPlaying(title, artist, imgSrc);
+                Player.togglePlayPause();
+            });
+        });
+        
+        return content;
+    }
+    
+    // Create a detail view for a selected item
+    function createDetailView(title, sourceCard) {
+        const content = document.createElement('div');
+        const isAlbum = sourceCard.querySelector('p').textContent.includes('Album') || 
+                       !sourceCard.querySelector('p').textContent.includes('Playlist');
+        
+        // Extract image and subtitle
+        const imgSrc = sourceCard.querySelector('img').src;
+        const subtitle = sourceCard.querySelector('p').textContent;
+        
+        content.innerHTML = `
+            <div class="detail-container">
+                <div class="detail-header">
+                    <div class="detail-img">
+                        <img src="${imgSrc}" alt="${title}">
+                    </div>
+                    <div class="detail-info">
+                        <div class="detail-type">${isAlbum ? 'Album' : 'Playlist'}</div>
+                        <h1 class="detail-title">${title}</h1>
+                        <div class="detail-description">${subtitle}</div>
+                        <div class="detail-meta">
+                            <span class="detail-owner">${isAlbum ? subtitle.split(' • ')[0] : 'Spotify'}</span>
+                            <span class="detail-songs-count">10 songs</span>
+                            <span class="detail-duration">35 min 12 sec</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-controls">
+                    <button class="play-btn"><i class="fas fa-play"></i></button>
+                    <button class="like-btn"><i class="far fa-heart"></i></button>
+                    <button class="download-btn"><i class="fas fa-arrow-down"></i></button>
+                    <div class="detail-options">
+                        <button class="options-btn"><i class="fas fa-ellipsis-h"></i></button>
+                    </div>
+                </div>
+                
+                <div class="songs-table">
+                    <div class="songs-header">
+                        <div class="col-num">#</div>
+                        <div class="col-title">Title</div>
+                        ${isAlbum ? '' : '<div class="col-album">Album</div>'}
+                        <div class="col-date">Date Added</div>
+                        <div class="col-duration"><i class="far fa-clock"></i></div>
+                    </div>
+                    
+                    <div class="songs-list">
+                        ${generateDetailSongs(isAlbum)}
+                    </div>
+                </div>
+
+                
+                
                 
         
